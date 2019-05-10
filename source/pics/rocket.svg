@@ -1,0 +1,23 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 28.346 56.693">
+    <defs>
+        <clipPath id="_clipPath_njjCxkIGZP6HPpchRWH2VxXL0gbA2jJn">
+            <rect width="28.346" height="56.693"/>
+        </clipPath>
+    </defs>
+    <g clip-path="url(#_clipPath_njjCxkIGZP6HPpchRWH2VxXL0gbA2jJn)">
+        <g>
+            <g>
+                <rect x="10.828" y="9.492" width="12.164" height="33.047" transform="matrix(1,0,0,1,0,0)" 
+                fill="rgb(235,235,235)" vector-effect="non-scaling-stroke" stroke-width="0.01" stroke="rgb(0,0,0)"
+                stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="2"/>
+                <path d=" M 10.828 9.492 C 10.828 6.155 13.553 3.445 16.91 3.445 C 20.267 3.445 22.992 6.155 22.992
+                9.492 L 10.828 9.492 Z " fill="rgb(235,235,235)"/>
+            </g>
+            <path d=" M 11.602 43.826 L 8.578 55.005 L 12.094 50.294 L 12.656 56.693 L 15.961 50.716 
+            L 17.297 55.99 L 20.039 50.294 L 22.57 55.005 L 23.273 49.169 L 27.07 54.373 L 22.078 43.826 L 11.602 43.826 
+            Z " fill="rgb(215,154,42)" vector-effect="non-scaling-stroke" stroke-width="0.5" stroke="rgb(181,113,5)" 
+            stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="3"/>
+        </g>
+    </g>
+</svg>

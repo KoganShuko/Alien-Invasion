@@ -1,0 +1,68 @@
+<?xml version="1.0" standalone="no"?>
+<svg class="monster-part" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 204.094 141.732">
+    <defs>
+        <clipPath class="monster-part" id="_clipPath_G3S7LhIcwQw31ekh3Zbl86LLdBh8mWh9">
+            <rect width="204.094" height="141.732"/>
+        </clipPath>
+    </defs>
+    <g  class="monster-part" clip-path="url(#_clipPath_G3S7LhIcwQw31ekh3Zbl86LLdBh8mWh9)">
+        <g>
+            <path class="monster-part" d=" M 83.992 77.074 C 74.383 77.324 9.352 75.199 3.742 51.574 C -1.867 27.949 18.742 -0.926 59.617 12.199 
+            C 100.492 25.324 114.367 18.199 145.492 6.574 C 176.617 -5.051 202.867 13.324 203.992 22.324 C 205.117 31.324 205.117 
+            53.449 179.992 83.824 C 157.957 110.464 140.595 75.951 118.883 75.512 C 106.605 75.263 93.602 76.824 83.992 77.074 Z "
+            fill="rgb(153,39,145)"  vector-effect="non-scaling-stroke" stroke-width="1" stroke="rgb(0,0,0)" stroke-linejoin="miter" 
+            stroke-linecap="square" stroke-miterlimit="3" style="mix-blend-mode:overlay;"/>
+            <g>
+                <circle  class="monster-part" vector-effect="non-scaling-stroke" cx="11.932226655809735" cy="31.509190725666468" r="5.669291338582678" 
+                fill="rgb(255,255,255)" stroke-width="0.2" stroke="rgb(0,0,0)" stroke-linejoin="miter" stroke-linecap="square" 
+                stroke-miterlimit="3"/>
+                <circle  class="monster-part" vector-effect="non-scaling-stroke" cx="36.39322567155768" cy="29.444107064249135"
+                r="5.6692913385826795" fill="rgb(255,255,255)" stroke-width="0.2" stroke="rgb(0,0,0)" stroke-linejoin="miter"
+                stroke-linecap="square" stroke-miterlimit="3"/>
+                <circle class="monster-part"  vector-effect="non-scaling-stroke" cx="22.330725671557765" 
+                cy="10.9414003713358" r="5.669291338582678" fill="rgb(255,255,255)" stroke-width="0.2" stroke="rgb(0,0,0)" 
+                stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="3"/>
+                <circle  class="monster-part" vector-effect="non-scaling-stroke" 
+                cx="11.932226655809735" cy="18.993565725666468" r="5.669291338582678" fill="rgb(255,255,255)" stroke-width="0.2" 
+                stroke="rgb(0,0,0)" stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="3"/>
+                <circle class="monster-part" vector-effect="non-scaling-stroke" cx="33.669308348723064" cy="16.610691709918466" r="5.6692913385826795"
+                fill="rgb(255,255,255)" stroke-width="0.2" stroke="rgb(0,0,0)" stroke-linejoin="miter" stroke-linecap="square" 
+                stroke-miterlimit="3"/>
+                <circle  class="monster-part" vector-effect="non-scaling-stroke" cx="24.210892994392342" cy="35.113398402831805"
+                r="5.669291338582678" fill="rgb(255,255,255)" stroke-width="0.2" stroke="rgb(0,0,0)" stroke-linejoin="miter"
+                stroke-linecap="square" stroke-miterlimit="3"/>
+                <circle class="monster-part" vector-effect="non-scaling-stroke" cx="23.270809332975098" 
+                cy="23.774815725666468" r="5.669291338582678" fill="rgb(255,255,255)" stroke-width="0.2" stroke="rgb(0,0,0)"
+                stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="3"/>
+                <ellipse class="monster-part" vector-effect="non-scaling-stroke"
+                cx="22.014288663683804" cy="11.1055243870838" rx="1.2565206692913193" ry="1.28125" fill="rgb(0,0,0)"/>
+                <ellipse class="monster-part" vector-effect="non-scaling-stroke" cx="14.764288663683807" cy="18.1055243870838" rx="1.2565206692913202" 
+                ry="1.28125" fill="rgb(0,0,0)"/>
+                <ellipse class="monster-part" vector-effect="non-scaling-stroke" cx="22.330725671557794" 
+                cy="20.998733048501133" rx="1.2565206692913193" ry="1.28125" fill="rgb(0,0,0)"/>
+                <ellipse class="monster-part" vector-effect="non-scaling-stroke" cx="37.13928866368381" cy="16.8242743870838" rx="1.2565206692913193" 
+                ry="1.28125" fill="rgb(0,0,0)"/>
+                <ellipse class="monster-part" vector-effect="non-scaling-stroke" cx="32.82678866368381"
+                cy="31.105524387083733" rx="1.2565206692913193" ry="1.2812499999999982" fill="rgb(0,0,0)"/>
+                <ellipse class="monster-part" vector-effect="non-scaling-stroke" cx="24.210892994392374" cy="35.113398402831805" rx="1.2565206692913193"
+                ry="1.28125" fill="rgb(0,0,0)"/>
+                <ellipse class="monster-part" vector-effect="non-scaling-stroke" cx="12.251247325101168" 
+                cy="29.824274387083737" rx="1.2565206692913193" ry="1.28125" fill="rgb(0,0,0)"/>
+            </g>
+            <ellipse class="mouth monster-part" vector-effect="non-scaling-stroke" cx="90.52056326998297" cy="75.2383368870836" rx="28.42575049212607"
+            ry="1.9453124999999858" fill="rgb(159,13,13)" stroke-width="0.2" stroke="rgb(0,0,0)" stroke-linejoin="miter" 
+            stroke-linecap="square" stroke-miterlimit="3"/>
+            <path  class="monster-part" d=" M 114.176 74.356 L 113.227 96.387 Q 112.852 101.356 
+            108.633 113.168 C 104.414 124.981 103.195 130.793 96.539 136.137 C 89.883 141.481 75.352 143.637 67.57 137.168 
+            C 59.789 130.699 56.414 124.699 60.07 115.324 C 63.727 105.949 68.32 99.106 75.164 98.637 C 82.008 98.168 88.758 
+            97.324 95.508 102.762 C 102.258 108.199 94.57 121.324 88.008 122.637 C 81.445 123.949 72.727 118.324 74.32 113.168
+            C 75.914 108.012 82.758 108.012 85.383 110.074 C 88.008 112.137 93.914 110.168 92.977 107.918 C 92.039 105.668 
+            85.383 101.824 77.977 105.574 C 70.57 109.324 69.914 107.449 66.258 112.137 C 62.602 116.824 62.977 127.699 68.977
+            130.887 C 74.977 134.074 86.32 136.793 91.289 133.793 C 96.258 130.793 100.57 121.512 102.82 111.574 C 105.07
+            101.637 107.602 98.074 107.695 91.418 Q 107.789 84.762 107.695 73.699 L 114.176 74.356 Z " fill="rgb(187,25,25)"
+            vector-effect="non-scaling-stroke" stroke-width="0.1" stroke="rgb(255,0,0)" stroke-linejoin="miter" 
+            stroke-linecap="square" stroke-miterlimit="3"/>
+        </g>
+    </g>
+</svg>
+
