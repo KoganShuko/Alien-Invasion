@@ -18,7 +18,7 @@
  },
  "rules": {
      "no-console":"off",
-     "linebreak-style":["error", "windows"],
+     "linebreak-style":"off",
      "func-names": 0,
      "no-plusplus":"off",
      "no-restricted-syntax":"off"
