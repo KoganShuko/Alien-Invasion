@@ -17,36 +17,17 @@ class Monster {
     this.monsterSvg = monsterSVG;
     this.containerTag = options.containerTag;
     this.coords = options.coords;
-    function getId() {
-      let id = 0;
-      while (monsterCounter[id]) {
-        id++;
-      }
-      monsterCounter[id] = true;
-      return id;
-    }
-    this.idNumber = getId();
+    this.idNumber = Monster.getId();
     this.id = `monster${this.idNumber}`;
-
-    const checkMonstersCount = () => {
-      let monsterCount = 0;
-      for (const monster in monsterCounter) {
-        if (Object.prototype.hasOwnProperty.call(monsterCounter, monster)) {
-          monsterCount++;
-        }
-      }
-      if (monsterCount > globalMaxMonstersCount) {
-        window.clearInterval(globalMonsterInvasionTimer);
-        globalMonsterInvasionTimer = null;
-      }
-    };
-    checkMonstersCount();
   }
 
-  insertToList = (id, monster) => {
-    destroyableList[id] = {
-      instance: monster,
-    };
+  static getId() {
+    let id = 0;
+    while (monsterCounter[id]) {
+      id++;
+    }
+    monsterCounter[id] = true;
+    return id;
   }
 
   static activateInvasion(interval, maxMonstersCount) {
@@ -71,7 +52,20 @@ class Monster {
     }, interval);
   }
 
-  show = () => {
+  show() {
+    const insertToList = (id, monster) => {
+      destroyableList[id] = {
+        instance: monster,
+      };
+    };
+    const checkMonstersCount = () => {
+      const monsterCount = Object.keys(monsterCounter).length;
+      if (monsterCount > globalMaxMonstersCount) {
+        window.clearInterval(globalMonsterInvasionTimer);
+        globalMonsterInvasionTimer = null;
+      }
+    };
+    checkMonstersCount();
     return new Promise((res) => {
       $(this.monsterSvg)
         .attr({
@@ -92,7 +86,7 @@ class Monster {
         }, 1000, () => {
           res();
         });
-      this.insertToList(this.id, this);
+      insertToList(this.id, this);
     });
   }
 
@@ -108,20 +102,21 @@ class Monster {
           container: this.containerTag,
           monsterId: this.id,
         });
+        blob.show();
         blob.fall();
         window.setTimeout(() => res(), getRandomAttackDelay());
       });
     }
   }
 
-  wound = (damageValue) => {
+  wound(damageValue) {
     this.hp -= damageValue;
     if (this.hp <= 0) {
       this.death();
     }
   }
 
-  death = () => {
+  death() {
     $(`#${this.id}`).remove();
     delete destroyableList[this.id];
     delete monsterCounter[this.idNumber];
@@ -139,16 +134,26 @@ class Blob {
     this.fallTimer = null;
     this.monsterId = options.monsterId;
     this.coords = $(`#${this.monsterId}`).offset();
-    function getId() {
-      let id = 0;
-      while (blobCounter[id]) {
-        id++;
-      }
-      blobCounter[id] = true;
-      return id;
-    }
-    this.idNumber = getId();
+    this.idNumber = Blob.getId();
     this.id = `blob${this.idNumber}`;
+    this.stepValue = 0.8;
+  }
+
+  static getId() {
+    let id = 0;
+    while (blobCounter[id]) {
+      id++;
+    }
+    blobCounter[id] = true;
+    return id;
+  }
+
+  show() {
+    const insertToList = (id, blob) => {
+      destroyableList[id] = {
+        instance: blob,
+      };
+    };
     this.blobSVG = $(blobSVG)
       .attr({
         width: '2%',
@@ -162,40 +167,32 @@ class Blob {
       })
       .addClass('monster-part')
       .appendTo(this.container);
-    this.insertToList(this.id, this);
-    this.stepValue = 0.8;
+    insertToList(this.id, this);
   }
 
-  insertToList = (id, blob) => {
-    destroyableList[id] = {
-      instance: blob,
-    };
-  }
-
-  fall = () => {
+  fall() {
     this.coords.top = this.coords.top + this.stepValue;
     $(this.blobSVG)
       .css({
         top: `${this.coords.top}px`,
       });
     if (this.coords.top < 500) {
-      this.fallTimer = requestAnimationFrame(this.fall);
+      this.fallTimer = requestAnimationFrame(this.fall.bind(this));
     } else {
       this.death();
       cancelAnimationFrame(this.fallTimer);
     }
   }
 
-  wound = (damageValue) => {
+  wound(damageValue) {
     this.hp -= damageValue;
     if (this.hp <= 0) {
       this.death();
     }
   }
 
-  death = () => {
+  death() {
     $(`#${this.id}`).remove();
-    console.log(destroyableList[this.id])
     delete destroyableList[this.id];
     delete blobCounter[this.id];
   }

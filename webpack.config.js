@@ -1,8 +1,8 @@
-let path = require('path');
-let webpack = require('webpack')
+const path = require('path');
+const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 
-let conf = {
+const conf = {
   entry: './source/main.js',
   output: {
     path: path.join(__dirname, '/output'),

@@ -9,26 +9,26 @@ class MachineGun {
     this.keyStatus = {
       65: {
         status: false,
-        function: this.rotate.bind(null, 65),
+        function: this.rotate.bind(this, 65),
         timer: null,
         animationSpeed: 30,
       },
       68: {
         status: false,
-        function: this.rotate.bind(null, 68),
+        function: this.rotate.bind(this, 68),
         timer: null,
         animationSpeed: 30,
       },
       32: {
         status: false,
-        function: this.fire,
+        function: this.fire.bind(this),
         timer: null,
         animationSpeed: 150,
       },
     };
   }
 
-  activate = () => {
+  activate() {
     $(window).on('keydown', (event) => {
       const keyObj = this.keyStatus[event.which];
       if (keyObj) {
@@ -51,7 +51,7 @@ class MachineGun {
     });
   }
 
-  rotate = (key) => {
+  rotate(key) {
     if (key === 65) { // 65 === a или ф
       if (this.angle < -60) {
         return false;
@@ -70,9 +70,9 @@ class MachineGun {
       'transform-origin': 'left bottom',
     });
     return false;
-  };
+  }
 
-  fire = () => {
+  fire() {
     const bullet = new Bullet({
       angle: this.angle,
       machineGunTag: this.machineGunTag,
@@ -90,47 +90,16 @@ class Bullet {
     this.damageValue = 0.1;
     this.damageAreaWidth = '2%';
     this.angle = options.angle;
-    const machineGunWidth = parseInt($(document.querySelector(options.machineGunTag)).css('width'), 10);
-    const machineGunHeight = parseInt($(document.querySelector(options.machineGunTag)).css('height'), 10);
-    const machineGunCoords = $(options.machineGunTag).offset();
-    const startPointOffsetX = machineGunWidth * Math.cos(this.angle * Math.PI / 180) / 2;
-    const startPointOffsetY = machineGunWidth * Math.sin(this.angle * Math.PI / 180) / 2;
+    [this.startPoint, this.endPoint] = this.getStartPoint(options.machineGunTag);
+    this.damageArea = this.createBulletBody();
+    [this.stepXValue, this.stepYValue] = this.calculateFlyStep();
+    this.stepX = 0;
+    this.stepY = 0;
+    this.animationId = null;
+  }
 
-    this.startPoint = {
-      x: this.angle > 0 ? machineGunCoords.left + startPointOffsetX - this.bodyOffset
-        : machineGunCoords.left + Math.abs(machineGunHeight * Math.sin(this.angle * Math.PI / 180))
-        + startPointOffsetX - this.bodyOffset,
-      y: machineGunCoords.top + machineGunHeight * Math.cos(this.angle * Math.PI / 180)
-        + Math.abs(startPointOffsetY),
-    };
-    this.endPoint = {
-      x: this.angle > 0 ? machineGunCoords.left - this.bodyOffset
-        + Math.abs(machineGunHeight * Math.sin(this.angle * Math.PI / 180)) + startPointOffsetX
-        : machineGunCoords.left + startPointOffsetX - this.bodyOffset,
-      y: machineGunCoords.top + Math.abs(startPointOffsetY),
-    };
-    this.damageArea = $('<div>')
-      .addClass('damageArea')
-      .css({
-        height: `${parseFloat(this.damageAreaWidth) * 1.25}%`,
-        width: this.damageAreaWidth,
-      })
-      .appendTo('.main-field__content'); // bullet and damageArea in mainGame less
-    if (this.angle > 0) {
-      this.damageArea
-        .css({
-          transform: `translate(-50%, -50%) rotate(${this.angle}deg)`,
-        });
-    } else {
-      this.damageArea.css({
-        transform: `translate(-25%, -25%) rotate(${this.angle}deg)`,
-      });
-    }
-    const bulletPic = $('<div>')
-      .addClass('bullet')
-      .appendTo(this.damageArea);
-
-    this.getBulletPathLength = () => {
+  calculateFlyStep() {
+    const getBulletPathLength = () => {
       const bodyWidth = parseFloat($('body').css('width'));
       const maxXPath = Math.max(this.startPoint.x, bodyWidth - this.startPoint.x);
       const totalPath = Math.sqrt((this.startPoint.y ** 2) + (maxXPath ** 2));
@@ -140,16 +109,61 @@ class Bullet {
       };
       return coordsOffset;
     };
-    this.pathX = this.getBulletPathLength().x;
-    this.pathY = this.getBulletPathLength().y;
-    this.stepXValue = this.pathX / 50;
-    this.stepYValue = this.pathY / 50;
-    this.stepX = 0;
-    this.stepY = 0;
-    this.animationId = null;
+    const pathX = getBulletPathLength().x;
+    this.pathY = getBulletPathLength().y;
+    const stepXValue = pathX / 50;
+    const stepYValue = this.pathY / 50;
+    return [stepXValue, stepYValue];
   }
 
-  fly = () => {
+  createBulletBody() {
+    const damageArea = $('<div>')
+      .addClass('damageArea')
+      .css({
+        height: `${parseFloat(this.damageAreaWidth) * 1.25}%`,
+        width: this.damageAreaWidth,
+      })
+      .appendTo('.main-field__content'); // bullet and damageArea in mainGame less
+    if (this.angle > 0) {
+      damageArea
+        .css({
+          transform: `translate(-50%, -50%) rotate(${this.angle}deg)`,
+        });
+    } else {
+      damageArea.css({
+        transform: `translate(-25%, -25%) rotate(${this.angle}deg)`,
+      });
+    }
+    const bulletPic = $('<div>')
+      .addClass('bullet')
+      .appendTo(damageArea);
+    return damageArea;
+  }
+
+  getStartPoint(machineGunTag) {
+    const machineGunWidth = parseInt($(document.querySelector(machineGunTag)).css('width'), 10);
+    const machineGunHeight = parseInt($(document.querySelector(machineGunTag)).css('height'), 10);
+    const machineGunCoords = $(machineGunTag).offset();
+    const startPointOffsetX = machineGunWidth * Math.cos(this.angle * Math.PI / 180) / 2;
+    const startPointOffsetY = machineGunWidth * Math.sin(this.angle * Math.PI / 180) / 2;
+
+    const startPoint = {
+      x: this.angle > 0 ? machineGunCoords.left + startPointOffsetX - this.bodyOffset
+        : machineGunCoords.left + Math.abs(machineGunHeight * Math.sin(this.angle * Math.PI / 180))
+          + startPointOffsetX - this.bodyOffset,
+      y: machineGunCoords.top + machineGunHeight * Math.cos(this.angle * Math.PI / 180)
+          + Math.abs(startPointOffsetY),
+    };
+    const endPoint = {
+      x: this.angle > 0 ? machineGunCoords.left - this.bodyOffset
+          + Math.abs(machineGunHeight * Math.sin(this.angle * Math.PI / 180)) + startPointOffsetX
+        : machineGunCoords.left + startPointOffsetX - this.bodyOffset,
+      y: machineGunCoords.top + Math.abs(startPointOffsetY),
+    };
+    return [startPoint, endPoint];
+  }
+
+  fly() {
     // (y2 - y2) * (x - x1) / (x2 - x1) + y1 = y
     const equation = this.angle >= 0 ? {
       x: this.endPoint.x + this.stepX,
@@ -172,14 +186,14 @@ class Bullet {
     });
     if (this.stepY <= this.pathY) {
       this.targetSearch();
-      this.animationId = requestAnimationFrame(this.fly);
+      this.animationId = requestAnimationFrame(this.fly.bind(this));
     } else {
       cancelAnimationFrame(this.animationId);
       this.damageArea.remove();
     }
   }
 
-  targetSearch = () => {
+  targetSearch() {
     const coords = this.damageArea.offset();
     if (!coords.left) {
       return;
@@ -188,7 +202,7 @@ class Bullet {
       width: parseFloat(window.getComputedStyle(this.damageArea[0]).width),
       height: parseFloat(window.getComputedStyle(this.damageArea[0]).height),
     };
-    console.log(damageAreaSizePx, coords);
+
     const pointOne = $(document.elementFromPoint(coords.left - 2,
       coords.top + damageAreaSizePx.height + 2));
     const pointTwo = $(document.elementFromPoint(coords.left + damageAreaSizePx.width + 2,
