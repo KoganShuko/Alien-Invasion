@@ -12,9 +12,11 @@ class ControlPanel {
     const firstRule = $('<div>')
       .addClass('rules-list__item')
       .appendTo(rulesContainer);
+    firstRule.text('Пулемет: a - влево; в - вправо; space - огонь');
     const secondRule = $('<div>')
       .addClass('rules-list__item')
       .appendTo(rulesContainer);
+    secondRule.text('Ракеты: l-click');
 
     $(options.button).on('click', () => {
       $(this.controlPanelContainer)
