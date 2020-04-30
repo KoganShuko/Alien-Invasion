@@ -40,7 +40,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.4.0",
     "autoprefixer": "^9.5.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "postcss-loader": "^3.0.0",
     "snapsvg": "^0.5.1",
     "snapsvg-cjs": "0.0.6"
